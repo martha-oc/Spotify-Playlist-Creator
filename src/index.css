@@ -1,0 +1,408 @@
+:root {
+  --background: #121212;
+  --surface: #181818;
+  --surface-light: #242424;
+  --spotify-green: #1db954;
+  --spotify-green-light: #1ed760;
+  --text: #ffffff;
+  --text-secondary: #b3b3b3;
+  --border: #2a2a2a;
+}
+
+/* Global */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* App */
+
+.app {
+  min-height: 100vh;
+  padding-bottom: 60px;
+  background: linear-gradient(180deg, #1e1e1e 0%, #121212 45%);
+}
+
+/* Header */
+
+.header {
+  padding: 35px 20px 30px;
+  text-align: center;
+  background: #000;
+  border-bottom: 1px solid #222;
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--spotify-green);
+  font-size: 46px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-shadow: 0 0 20px rgba(29, 185, 84, 0.15);
+}
+
+/* Login */
+
+.login-button {
+  display: block;
+  margin: 24px auto;
+  padding: 13px 30px;
+  border: none;
+  border-radius: 30px;
+  background: var(--spotify-green);
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.login-button:hover {
+  background: var(--spotify-green-light);
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(29, 185, 84, 0.25);
+}
+
+.login-button:active {
+  transform: scale(0.98);
+}
+
+/* Logged-in state */
+
+.logged-in {
+  width: fit-content;
+  margin: 24px auto;
+  padding: 13px 30px;
+  border-radius: 30px;
+  background: #1b3325;
+  color: var(--spotify-green);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* App description */
+
+.app-description {
+  max-width: 500px;
+  margin: 8px auto 32px;
+  padding: 0 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Search */
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 25px auto 0;
+  padding: 20px;
+}
+
+.search-container input {
+  width: 420px;
+  max-width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #444;
+  border-radius: 30px;
+  background: var(--surface-light);
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.search-container input::placeholder {
+  color: #888;
+}
+
+.search-container input:focus {
+  border-color: var(--spotify-green);
+  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.2);
+}
+
+.search-container button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 30px;
+  background: var(--spotify-green);
+  color: #000;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.search-container button:hover {
+  background: var(--spotify-green-light);
+  transform: scale(1.03);
+}
+
+/* Main content */
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 35px auto 0;
+  padding: 0 20px;
+}
+
+.main-content > div {
+  min-width: 0;
+}
+
+/* Panels */
+
+.search-results,
+.playlist {
+  min-height: 400px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.search-results h2,
+.playlist h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #333;
+  color: var(--text);
+  font-size: 22px;
+  letter-spacing: 0.2px;
+}
+
+/* Playlist name */
+
+.playlist input {
+  width: 100%;
+  margin-bottom: 22px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  background: transparent;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.playlist input:focus {
+  border-bottom-color: var(--spotify-green);
+}
+
+.playlist input::placeholder {
+  color: #777;
+}
+
+/* Tracks */
+
+.track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.track:hover {
+  background: var(--surface-light);
+  border-radius: 8px;
+}
+
+.track-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-info h3 {
+  margin: 0 0 5px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.track-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Add / Remove buttons */
+
+.track button {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: var(--spotify-green);
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.track button:hover {
+  background: var(--spotify-green-light);
+  transform: scale(1.1);
+}
+
+/* Save button */
+
+.save-button {
+  width: 100%;
+  margin: 30px 0 0;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 30px;
+  background: var(--spotify-green);
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.save-button:hover {
+  background: var(--spotify-green-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(29, 185, 84, 0.25);
+}
+
+.save-button:active {
+  transform: translateY(0);
+}
+
+.save-button:disabled {
+  background: #555;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Empty playlist */
+
+.empty-playlist {
+  margin: 0;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .header {
+    padding: 28px 20px 24px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container input {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+    margin-top: 25px;
+  }
+
+  .search-results,
+  .playlist {
+    padding: 20px;
+  }
+}
+
+.playlist input {
+  width: 100%;
+  margin-bottom: 22px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  background: transparent;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.playlist input::placeholder {
+  color: #b3b3b3;
+  opacity: 1;
+}
+
+.playlist input:hover {
+  border-bottom-color: #666;
+}
+
+.playlist input:focus {
+  border-bottom-color: var(--spotify-green);
+}
+
+.footer {
+  margin-top: 60px;
+  padding: 25px 20px;
+  text-align: center;
+  border-top: 1px solid #222;
+  background: #000;
+}
+
+.footer p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.footer p::first-letter {
+  color: var(--spotify-green);
+}
