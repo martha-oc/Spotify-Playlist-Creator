@@ -1,7 +1,6 @@
 const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const redirectUri = import.meta.env.VITE_REDIRECT_URI;
 
-
 function generateRandomString(length) {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -92,14 +91,40 @@ async function searchSpotify(term) {
     throw new Error("No Spotify access token. Please log in first.");
   }
 
-  const response = await fetch(
-    `https://api.spotify.com/v1/search?q=${encodeURIComponent(term)}&type=track`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+  const userResponse = await fetch("https://api.spotify.com/v1/me", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
     },
-  );
+  });
+
+  if (!userResponse.ok) {
+    const errorData = await userResponse.json();
+
+    console.error("Could not get Spotify user:", errorData);
+
+    throw new Error(errorData.error?.message || "Could not get Spotify user");
+  }
+
+  const user = await userResponse.json();
+
+  console.log("Spotify user country:", user.country);
+
+  const searchUrl = new URL("https://api.spotify.com/v1/search");
+
+  searchUrl.searchParams.set("q", term);
+  searchUrl.searchParams.set("type", "track");
+
+  if (user.country) {
+    searchUrl.searchParams.set("market", user.country);
+  }
+
+  console.log("Spotify search URL:", searchUrl.toString());
+
+  const response = await fetch(searchUrl.toString(), {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -110,7 +135,6 @@ async function searchSpotify(term) {
       errorData.error?.message || `Spotify search failed (${response.status})`,
     );
   }
-
 
   const data = await response.json();
 
