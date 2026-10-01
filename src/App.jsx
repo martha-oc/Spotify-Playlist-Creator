@@ -23,8 +23,6 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
 
-    // If Spotify redirected us back with an authorization code,
-    // exchange it for an access token.
     if (code) {
       if (sessionStorage.getItem("spotify_code_used") === code) {
         console.log("Authorization code already processed");
@@ -51,7 +49,6 @@ function App() {
       }
     }
 
-    // If there is already a token, check whether it is still valid.
     const existingToken = localStorage.getItem("access_token");
 
     if (existingToken) {
@@ -80,8 +77,10 @@ function App() {
       console.log(results);
     } catch (error) {
       console.error("Search failed:", error);
+      alert(`Search failed: ${error.message}`);
     }
   }
+
 
   function addTrack(track) {
     console.log("Adding to playlist:", track.name);
@@ -108,22 +107,16 @@ function App() {
     }
 
     try {
-      // Use "My Playlist" if the user leaves
-      // the playlist name empty.
       const name = playlistName.trim() || "My Playlist";
 
-      // Create the playlist on Spotify.
       const spotifyPlaylist = await createPlaylist(name);
 
-      // Get the Spotify URI for every track.
       const trackUris = playlist.map((track) => track.uri);
 
-      // Add the tracks to the new playlist.
       await addTracksToPlaylist(spotifyPlaylist.id, trackUris);
 
       console.log("Playlist saved to Spotify!");
 
-      // Reset the app after a successful save.
       setPlaylist([]);
       setTracks([]);
       setPlaylistName("");

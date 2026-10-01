@@ -102,8 +102,15 @@ async function searchSpotify(term) {
   );
 
   if (!response.ok) {
-    throw new Error("Spotify search failed");
+    const errorData = await response.json();
+
+    console.error("Spotify search error:", errorData);
+
+    throw new Error(
+      errorData.error?.message || `Spotify search failed (${response.status})`,
+    );
   }
+
 
   const data = await response.json();
 

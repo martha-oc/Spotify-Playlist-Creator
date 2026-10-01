@@ -9,7 +9,6 @@
   --border: #2a2a2a;
 }
 
-/* Global */
 
 * {
   box-sizing: border-box;
@@ -27,7 +26,6 @@ button {
   cursor: pointer;
 }
 
-/* App */
 
 .app {
   min-height: 100vh;
@@ -35,7 +33,6 @@ button {
   background: linear-gradient(180deg, #1e1e1e 0%, #121212 45%);
 }
 
-/* Header */
 
 .header {
   padding: 35px 20px 30px;
@@ -52,8 +49,6 @@ button {
   letter-spacing: -1px;
   text-shadow: 0 0 20px rgba(29, 185, 84, 0.15);
 }
-
-/* Login */
 
 .login-button {
   display: block;
@@ -82,7 +77,6 @@ button {
   transform: scale(0.98);
 }
 
-/* Logged-in state */
 
 .logged-in {
   width: fit-content;
@@ -95,7 +89,6 @@ button {
   font-weight: bold;
 }
 
-/* App description */
 
 .app-description {
   max-width: 500px;
@@ -107,7 +100,6 @@ button {
   line-height: 1.6;
 }
 
-/* Search */
 
 .search-container {
   display: flex;
@@ -199,7 +191,6 @@ button {
   letter-spacing: 0.2px;
 }
 
-/* Playlist name */
 
 .playlist input {
   width: 100%;
@@ -223,7 +214,6 @@ button {
   color: #777;
 }
 
-/* Tracks */
 
 .track {
   display: flex;
@@ -258,8 +248,6 @@ button {
   font-size: 14px;
 }
 
-/* Add / Remove buttons */
-
 .track button {
   flex-shrink: 0;
   width: 34px;
@@ -281,7 +269,6 @@ button {
   transform: scale(1.1);
 }
 
-/* Save button */
 
 .save-button {
   width: 100%;
@@ -318,7 +305,6 @@ button {
   box-shadow: none;
 }
 
-/* Empty playlist */
 
 .empty-playlist {
   margin: 0;
@@ -329,7 +315,6 @@ button {
   line-height: 1.6;
 }
 
-/* Mobile */
 
 @media (max-width: 768px) {
   .header {
