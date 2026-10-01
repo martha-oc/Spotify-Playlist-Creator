@@ -91,32 +91,13 @@ async function searchSpotify(term) {
     throw new Error("No Spotify access token. Please log in first.");
   }
 
-  const userResponse = await fetch("https://api.spotify.com/v1/me", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!userResponse.ok) {
-    const errorData = await userResponse.json();
-
-    console.error("Could not get Spotify user:", errorData);
-
-    throw new Error(errorData.error?.message || "Could not get Spotify user");
-  }
-
-  const user = await userResponse.json();
-
-  console.log("Spotify user country:", user.country);
-
   const searchUrl = new URL("https://api.spotify.com/v1/search");
 
   searchUrl.searchParams.set("q", term);
   searchUrl.searchParams.set("type", "track");
 
-  if (user.country) {
-    searchUrl.searchParams.set("market", user.country);
-  }
+  
+  searchUrl.searchParams.set("market", "IE");
 
   console.log("Spotify search URL:", searchUrl.toString());
 
@@ -182,7 +163,9 @@ async function createPlaylist(playlistName) {
 
   if (!response.ok) {
     const errorData = await response.json();
+
     console.error("Create playlist error:", errorData);
+
     throw new Error("Could not create Spotify playlist");
   }
 
@@ -210,7 +193,9 @@ async function addTracksToPlaylist(playlistId, trackUris) {
 
   if (!response.ok) {
     const errorData = await response.json();
+
     console.error("Add tracks error:", errorData);
+
     throw new Error("Could not add tracks to Spotify playlist");
   }
 
