@@ -96,7 +96,6 @@ async function searchSpotify(term) {
   searchUrl.searchParams.set("q", term);
   searchUrl.searchParams.set("type", "track");
 
-  
   searchUrl.searchParams.set("market", "IE");
 
   console.log("Spotify search URL:", searchUrl.toString());

@@ -18,6 +18,7 @@ function App() {
   const [playlist, setPlaylist] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -81,7 +82,6 @@ function App() {
     }
   }
 
-
   function addTrack(track) {
     console.log("Adding to playlist:", track.name);
 
@@ -106,6 +106,8 @@ function App() {
       return;
     }
 
+    setIsSaving(true);
+
     try {
       const name = playlistName.trim() || "My Playlist";
 
@@ -124,6 +126,9 @@ function App() {
       alert("Playlist saved to Spotify!");
     } catch (error) {
       console.error("Could not save playlist:", error);
+      alert("Could not save playlist. Please try again.");
+    } finally {
+      setIsSaving(false);
     }
   }
 
@@ -155,6 +160,7 @@ function App() {
           onPlaylistNameChange={setPlaylistName}
           onSave={savePlaylist}
           isLoggedIn={isLoggedIn}
+          isSaving={isSaving}
         />
       </div>
 

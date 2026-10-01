@@ -7,6 +7,7 @@ function Playlist({
   onPlaylistNameChange,
   onSave,
   isLoggedIn,
+  isSaving,
 }) {
   return (
     <div className="playlist">
@@ -17,6 +18,7 @@ function Playlist({
         value={playlistName}
         onChange={(event) => onPlaylistNameChange(event.target.value)}
         placeholder="My Playlist"
+        disabled={isSaving}
       />
 
       {playlist.length === 0 ? (
@@ -41,9 +43,13 @@ function Playlist({
           <button
             className="save-button"
             onClick={onSave}
-            disabled={!isLoggedIn}
+            disabled={!isLoggedIn || isSaving}
           >
-            {isLoggedIn ? "Save to Spotify" : "Log in to save"}
+            {isSaving
+              ? "Saving..."
+              : isLoggedIn
+                ? "Save to Spotify"
+                : "Log in to save"}
           </button>
         </>
       )}
